@@ -11,12 +11,16 @@
 #include <algorithm>
 #include <concepts>
 
+#include <kc/core/String.h>
+#include <boost/algorithm/string.hpp>
 #include <fmt/core.h>
 
 using u64 = uint64_t;
 using u32 = uint32_t;
 using u16 = uint16_t;
 using u8  = uint8_t;
+
+using namespace kc;
 
 template <typename T>
 requires std::is_integral_v<T>
@@ -51,4 +55,8 @@ std::vector<std::string> readInput(int argc, char** argv) {
 
     file.close();
     return out;
+}
+
+void printMap(const auto& map) {
+    for (auto& [k, v] : map) LOG("{} -> {}", k, v);
 }
