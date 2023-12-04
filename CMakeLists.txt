@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(libs fmt kc)
-set(targets 1 2 3)
+set(targets 1 2 3 4)
 
 add_subdirectory(libkc)
 
