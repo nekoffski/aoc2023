@@ -4,6 +4,7 @@
 #include <vector>
 #include <ostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <cstdint>
 #include <numeric>
@@ -15,6 +16,8 @@
 #include <boost/algorithm/string.hpp>
 #include <fmt/core.h>
 
+using i64 = int64_t;
+
 using u64 = uint64_t;
 using u32 = uint32_t;
 using u16 = uint16_t;
@@ -25,6 +28,8 @@ using namespace kc;
 template <typename T>
 requires std::is_integral_v<T>
 constexpr T charToIntegral(char c) { return static_cast<T>(c - '0'); }
+
+template <typename K, typename V> using Map = std::unordered_map<K, V>;
 
 #define LOG(...)                 \
     {                            \

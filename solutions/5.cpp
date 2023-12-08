@@ -27,23 +27,12 @@ int main(int argc, char** argv) {
             return key;
         }
 
-        std::vector<u64> rangeLookup(u64 key, u64 range) {
-            u64 begin = key;
-            u64 end   = key + range;
-
+        std::vector<u64> rangeLookup(const std::vector<std::pair<u64, u64>>& range) {
             std::vector<u64> out;
-            for (auto& record : records) {
-                if (begin >= record.k && begin <= record.k + record.range) {
-                    const auto diff = begin - record.k;
-                    out.push_back(record.v + diff);
-                } else if (end >= record.k && end <= record.k + record.range) {
-                    LOG("hmm?");
-                    out.push_back(record.v);
-                } else if (begin < record.k && end > record.k + record.range) {
-                    LOG("hmm?2");
-                    out.push_back(record.v);
-                }
+            for (auto& [i, j] : range) {
+                // auto v = i + j;
             }
+
             return out;
         }
 
@@ -76,8 +65,8 @@ int main(int argc, char** argv) {
     // 2.
     std::vector<u64> possibleSeeds;
     for (int i = 0; i < seeds.size(); i += 2) {
-        auto local = maps[0].rangeLookup(seeds[i], seeds[i + 1]);
-        std::copy(local.begin(), local.end(), std::back_inserter(possibleSeeds));
+        // auto local = maps[0].rangeLookup(seeds[i], seeds[i + 1]);
+        // std::copy(local.begin(), local.end(), std::back_inserter(possibleSeeds));
     }
 
     for (int i = 1; i < maps.size(); ++i)

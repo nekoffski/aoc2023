@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-DSPDLOG_COMPILED_LIB=1)
 
 set(libs fmt kc spdlog)
-set(targets 1 2 3 4 5 6)
+set(targets 1 2 3 4 5 6 7 8)
 
 add_subdirectory(libkc)
 
