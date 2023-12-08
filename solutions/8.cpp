@@ -5,7 +5,7 @@ u64 gcd(u64 a, u64 b) {
     return gcd(b, a % b);
 }
 
-u64 lcm(std::vector<u64> arr) {
+u64 lcm(const std::vector<u64>& arr) {
     u64 ans = arr[0];
     for (int i = 1; i < arr.size(); i++)
         ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
