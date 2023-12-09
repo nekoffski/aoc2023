@@ -62,6 +62,16 @@ std::vector<std::string> readInput(int argc, char** argv) {
     return out;
 }
 
-void printMap(const auto& map) {
-    for (auto& [k, v] : map) LOG("{} -> {}", k, v);
+std::string formatMap(const auto& map) {
+    std::string out;
+    for (auto& [k, v] : map) out += fmt::format("{} -> {}\n", k, v);
+    return out;
+}
+
+std::string formatVector(const auto& vector) {
+    std::string out = "[";
+    for (auto& k : vector) out += fmt::format("{},", k);
+    out.pop_back();
+    out += ']';
+    return out;
 }
