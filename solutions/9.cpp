@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     }
 
     LOG("Output1={}", output);
-    // 2
+    // 2 - it's almost the same, could be unified with the previous solution
     output = 0;
     for (const auto& line : input) {
         auto data = transformLine(line);

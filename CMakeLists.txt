@@ -7,12 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-DSPDLOG_COMPILED_LIB=1)
 
 set(libs fmt kc spdlog)
-set(targets 1 2 3 4 5 6 7 8 9)
+file(GLOB solutions ${CMAKE_CURRENT_SOURCE_DIR}/solutions/*.cpp)
 
 add_subdirectory(libkc)
 
-foreach (target ${targets})
-    add_executable(${target} solutions/${target}.cpp)
+foreach (solution ${solutions})
+    get_filename_component(target ${solution} NAME_WE)
+    add_executable(${target} ${solution})
     target_link_libraries(${target} ${libs})
     target_include_directories(${target} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 endforeach()
