@@ -21,57 +21,40 @@ int main(int argc, char** argv) {
     };
 
     // 1
-    i64 output = 0;
+    i64 output1 = 0;
+    i64 output2 = 0;
     for (const auto& line : input) {
         auto data = transformLine(line);
 
-        std::vector<i64> cache = { data.back() };
-        std::vector<i64> diffs = data;
+        std::vector<i64> rcache = { data.back() };
+        std::vector<i64> lcache = { data.front() };
+        std::vector<i64> diffs  = data;
 
         do {
             data = diffs;
             diffs.clear();
             for (int i = 0; i < data.size() - 1; ++i)
                 diffs.push_back(data[i + 1] - data[i]);
-            cache.push_back(diffs.back());
+            rcache.push_back(diffs.back());
+            lcache.push_back(diffs.front());
         } while (not allZero(diffs));
 
-        auto local = std::accumulate(cache.begin(), cache.end(), 0);
-        LOG("Cache: {}, sum={}", formatVector(cache), local);
-        output += local;
-    }
+        // 1.
+        auto local = std::accumulate(rcache.begin(), rcache.end(), 0);
+        output1 += local;
 
-    LOG("Output1={}", output);
-    // 2 - it's almost the same, could be unified with the previous solution
-    output = 0;
-    for (const auto& line : input) {
-        auto data = transformLine(line);
-
-        std::vector<i64> cache = { data.front() };
-        std::vector<i64> diffs = data;
-
-        do {
-            data = diffs;
-            diffs.clear();
-            for (int i = 0; i < data.size() - 1; ++i)
-                diffs.push_back(data[i + 1] - data[i]);
-            cache.push_back(diffs.front());
-        } while (not allZero(diffs));
-
-        LOG("Cache: {}", formatVector(cache));
-
-        while (cache.size() > 1) {
-            const int n = cache.size();
-            cache[n - 2] -= cache[n - 1];
-            cache.pop_back();
+        // 2.
+        while (lcache.size() > 1) {
+            const int n = lcache.size();
+            lcache[n - 2] -= lcache[n - 1];
+            lcache.pop_back();
         }
 
-        i64 local = cache.front();
-        LOG("\tdifference={}", local);
-        output += local;
+        output2 += lcache.front();
     }
 
-    LOG("Output2={}", output);
+    LOG("Output1={}", output1);
+    LOG("Output2={}", output2);
 
     return 0;
 }
